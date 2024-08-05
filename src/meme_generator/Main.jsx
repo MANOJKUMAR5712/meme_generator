@@ -14,7 +14,6 @@ function Main(){
     }
 
     function handleText(event){
-        console.log(event.target.value);
         setText(prevtext => {
             return {...prevtext,[event.target.id] : `${event.target.value}` }
         })
