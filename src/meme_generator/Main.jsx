@@ -21,18 +21,23 @@ function Main(){
     function handleImage(){
         setImage(randomimg());
     }
+
+    function handleSubmit(event){
+        event.preventDefault();
+        console.log(text);
+    }
     
     return(
         <div id="Main">
-            <form action="onclick" className="form">
+            <form className="form" onSubmit={handleSubmit}>
             <div id="inp_div">
             <input type="text" id="top_text" placeholder="top text" name="top_text" onChange={handleText}></input>
             <input type="text" id="bottom_text" placeholder="bottom text" name="bottom_text" onChange={handleText}></input>
             </div>
-            </form>
             <div id="submit_btn" >
             <button type="submit" id="get_meme" onClick={handleImage}>Get new meme 🖼️</button>
             </div>
+            </form>
             <div id="img">
                 <h2 id="top">{text.top_text}</h2>
                 <img src={memeimg} id="meme_img" width="800px" height="400px"></img>
