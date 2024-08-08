@@ -8,22 +8,19 @@ function Main(){
     function randomimg(){
         const meme = memes_data.data.memes
         const random_index = Math.floor(Math.random() * meme.length);
-        const meme_display = meme[random_index].url;
-        return meme_display;
+        return meme[random_index].url;
     }
 
     function handleText(event){
+        const {name,value,type} = event.target;
         setText(prevtext => {
-            return {...prevtext,[event.target.id] : `${event.target.value}` }
+            return {...prevtext,[name] : value }
         })
-    }
-
-    function handleImage(){
-        setImage(randomimg());
     }
 
     function handleSubmit(event){
         event.preventDefault();
+        setImage(randomimg());
         console.log(text);
     }
     
@@ -31,11 +28,11 @@ function Main(){
         <div id="Main">
             <form className="form" onSubmit={handleSubmit}>
             <div id="inp_div">
-            <input type="text" id="top_text" placeholder="top text" name="top_text" onChange={handleText}></input>
-            <input type="text" id="bottom_text" placeholder="bottom text" name="bottom_text" onChange={handleText}></input>
+            <input type="text" id="top_text" placeholder="top text" name="top_text" onChange={handleText} value ={text.top_text}></input>
+            <input type="text" id="bottom_text" placeholder="bottom text" name="bottom_text" onChange={handleText} value={text.bottom_text}></input>
             </div>
             <div id="submit_btn" >
-            <button type="submit" id="get_meme" onClick={handleImage}>Get new meme 🖼️</button>
+            <button type="submit" id="get_meme">Get new meme 🖼️</button>
             </div>
             </form>
             <div id="img">
