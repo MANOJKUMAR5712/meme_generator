@@ -23,7 +23,7 @@ function Main(){
         setImage(randomimg());
         console.log(text);
     }
-
+    
     useEffect(() => {
         async function getMemes(){
             const res = await fetch("https://api.imgflip.com/get_memes");
