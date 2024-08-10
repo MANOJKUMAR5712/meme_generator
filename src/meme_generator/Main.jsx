@@ -1,14 +1,14 @@
-import { useState } from "react";
-import memes_data from "./memes_data.jsx";
+import { useEffect, useState } from "react";
 
 function Main(){
+    let [allMemes,setAllmemes] = useState({})
     let [memeimg,setImage] = useState("https://upload.wikimedia.org/wikipedia/en/1/11/Disaster_Girl.jpg");
     let [text,setText] = useState({top_text:"Hello" , bottom_text:"Gaich"});
 
+
     function randomimg(){
-        const meme = memes_data.data.memes
-        const random_index = Math.floor(Math.random() * meme.length);
-        return meme[random_index].url;
+        const random_index = Math.floor(Math.random() * allMemes.length);
+        return allMemes[random_index].url;
     }
 
     function handleText(event){
@@ -23,6 +23,15 @@ function Main(){
         setImage(randomimg());
         console.log(text);
     }
+
+    useEffect(() => {
+        async function getMemes(){
+            const res = await fetch("https://api.imgflip.com/get_memes");
+            const meme_data = await res.json();
+            setAllmemes(meme_data.data.memes);
+        } 
+        getMemes();
+    },[])
     
     return(
         <div id="Main">
